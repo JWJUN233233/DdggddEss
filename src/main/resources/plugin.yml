@@ -1,0 +1,98 @@
+name: DdggddEss
+version: '${project.version}'
+main: ddggddess.ddggddess.DdggddEss
+commands:
+  Dlore:
+    description:
+      设置动态lore
+  chatcolor:
+    description:
+      设置聊天颜色
+  sethome:
+    description:
+      设置家
+  home:
+    description:
+      回家
+  suicide:
+    description:
+      自杀
+  back:
+    description:
+      返回
+  tpaclear:
+    description:
+      清空tpa缓存
+  chatnickname:
+    description:
+      设置称号
+  unbanip:
+    description:
+      解封ip
+  unban:
+    description:
+      解封玩家
+  feed:
+    description:
+      喂饱玩家
+  heal:
+    description:
+      治疗玩家
+  lockplayer:
+    description:
+      铐住玩家
+  tpahere:
+    description:
+      请求别人传送到你身边
+  invsee:
+    description:
+      查包
+  DisplayName:
+    description:
+      设置名称
+  gm:
+    description:
+      快捷切换模式
+  msg:
+    description:
+      聊天
+  tpa:
+    description:
+      传送到其他玩家
+  tpaccept:
+    description:
+      接受传送请求
+  DdggddEss:
+    description:
+      插件命令
+permissions:
+  chatcolor:
+    default: op
+  unbanip:
+    default: op
+  unban:
+    default: op
+  heal:
+    default: op
+  feed:
+    default: op
+  lockplayer:
+    default: op
+  invsee:
+    default: op
+  msg:
+    default: true
+  DisplayName:
+    default: op
+  tpa:
+    default: true
+  tpaccept:
+    default: true
+  DdggddEss:
+    default: true
+  gm:
+    default: op
+  champion:
+    default: op
+  tpaclear:
+    default: op
