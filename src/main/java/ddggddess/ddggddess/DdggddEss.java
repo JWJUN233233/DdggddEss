@@ -1,23 +1,34 @@
 package ddggddess.ddggddess;
+
 import ddggddess.ddggddess.Thread.DLoreUpdata;
 import ddggddess.ddggddess.commands.*;
+import ddggddess.ddggddess.commands.DdggddEssCommand.Command;
 import ddggddess.ddggddess.event.*;
-import ddggddess.ddggddess.other.DLore;
+import ddggddess.ddggddess.commands.DLore;
 import ddggddess.ddggddess.other.DdggddessPapi;
-import de.tr7zw.nbtapi.plugin.NBTAPI;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
+import ddggddess.ddggddess.Thread.*;
 public final class DdggddEss extends JavaPlugin {
     public static List<sava> savas = new ArrayList<>();
+    public static DLoreUpdata DLoreUpdata = new DLoreUpdata();
+    public static RGBColor rgbColor = new RGBColor();
+    public static void RegisterDdggddEssCommand(CommandExecutor commandExecutor,String CommandName){
+        ddggddess.ddggddess.commands.DdggddEssCommand.Command command = new Command();
+        command.CommandExecutor = commandExecutor;
+        command.TabCompleter = (TabCompleter) commandExecutor;
+        ddggddess.ddggddess.commands.DdggddEss.AddCommand(CommandName);
+        ddggddess.ddggddess.commands.DdggddEss.SetCommandExecutor(CommandName,command);
+    }
     @Override
     public void onEnable() {
         // Plugin startup logic
         //注册命令
+        getCommand("NBT").setExecutor(new NBT());
+        getCommand("DName").setExecutor(new DName());
         getCommand("Dlore").setExecutor(new DLore());
         getCommand("chatcolor").setExecutor(new chatcolor());
         getCommand("sethome").setExecutor(new sethome());
@@ -38,7 +49,31 @@ public final class DdggddEss extends JavaPlugin {
         getCommand("tpa").setExecutor(new tpa());
         getCommand("tpaccept").setExecutor(new tpaccept());
         getCommand("DdggddEss").setExecutor(new ddggddess.ddggddess.commands.DdggddEss());
+        //DdggddEssCommand
+        RegisterDdggddEssCommand(new NBT(),"NBT");
+        RegisterDdggddEssCommand(new DName(),"DLame");
+        RegisterDdggddEssCommand(new DLore(),"DLore");
+        RegisterDdggddEssCommand(new chatcolor(),"chatcolor");
+        RegisterDdggddEssCommand(new sethome(),"sethome");
+        RegisterDdggddEssCommand(new home(),"home");
+        RegisterDdggddEssCommand(new suicide(),"suicide");
+        RegisterDdggddEssCommand(new back(),"back");
+        RegisterDdggddEssCommand(new tpaclear(),"tpaclear");
+        RegisterDdggddEssCommand(new chatnickname(),"chatnickname");
+        RegisterDdggddEssCommand(new unban(),"unban");
+        RegisterDdggddEssCommand(new heal(),"heal");
+        RegisterDdggddEssCommand(new feed(),"feed");
+        RegisterDdggddEssCommand(new lockplayer(),"lockplayer");
+        RegisterDdggddEssCommand(new tpahere(),"tpahere");
+        RegisterDdggddEssCommand(new invsee(),"invsee");
+        RegisterDdggddEssCommand(new DisplayName(),"displayname");
+        RegisterDdggddEssCommand(new gm(),"gm");
+        RegisterDdggddEssCommand(new msg(),"msg");
+        RegisterDdggddEssCommand(new tpa(),"tpa");
+        RegisterDdggddEssCommand(new tpaccept(),"tpaccept");
+        RegisterDdggddEssCommand(new ddggddess.ddggddess.commands.DdggddEss(),"ddggddess");
         //注册事件
+        getServer().getPluginManager().registerEvents(new ddggddess.ddggddess.event.DdggddEss(),this);
         getServer().getPluginManager().registerEvents(new HomesGui(),this);
         getServer().getPluginManager().registerEvents(new zjh(),this);
         getServer().getPluginManager().registerEvents(new damage(),this);
@@ -58,7 +93,8 @@ public final class DdggddEss extends JavaPlugin {
         config.getConfig().set("invsee",null);
         config.getConfig().set("home_open",null);
         saveDefaultConfig();
-         new DLoreUpdata().start();
+        DLoreUpdata.start();
+        rgbColor.start();
         System.out.println("DdggddEss已加载");
     }
 
@@ -66,7 +102,8 @@ public final class DdggddEss extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         saveConfig();
+        DLoreUpdata.stop();
+        rgbColor.stop();
         System.out.println("DdggddEss已卸载");
     }
-
 }

@@ -17,11 +17,11 @@ public class chatnickname implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender,Command command,String label,String[] args) {
         JavaPlugin config = ddggddess.ddggddess.DdggddEss.getProvidingPlugin(DdggddEss.class);
-        if (sender.hasPermission("champion")) {
+        if (sender.hasPermission("chatnickname")) {
             String arg1 = args[0].replaceAll("&", "§") + "§r";
             if (args.length == 1) {
                 if (sender instanceof Player) {
-                    List<String> namelist = config.getConfig().getStringList("champion");
+                    List<String> namelist = config.getConfig().getStringList("chatnickname");
                     for (int i = 0; i < namelist.size() / 2; i++) {
                         if (Objects.equals(namelist.get(i * 2), sender.getName())) {
                             namelist.remove(i * 2);
@@ -31,14 +31,14 @@ public class chatnickname implements CommandExecutor, TabCompleter {
                     }
                     namelist.add(sender.getName());
                     namelist.add(arg1);
-                    config.getConfig().set("champion", namelist);
+                    config.getConfig().set("chatnickname", namelist);
                 } else {
                     sender.sendMessage("§e此命令只支持玩家使用");
                 }
             }
             if (args.length == 2) {
                 if(isplayer.IsHavePlayer(args[1])) {
-                    List<String> namelist = config.getConfig().getStringList("champion");
+                    List<String> namelist = config.getConfig().getStringList("chatnickname");
                     for (int i = 0; i < namelist.size() / 2; i++) {
                         if (Objects.equals(namelist.get(i * 2), args[1])) {
                             namelist.remove(i * 2);
@@ -48,7 +48,7 @@ public class chatnickname implements CommandExecutor, TabCompleter {
                     }
                     namelist.add(args[1]);
                     namelist.add(arg1);
-                    config.getConfig().set("champion", namelist);
+                    config.getConfig().set("chatnickname", namelist);
                 }else{
                     sender.sendMessage("§c玩家不存在或不在线");
                 }

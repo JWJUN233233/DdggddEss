@@ -1,6 +1,9 @@
 package ddggddess.ddggddess.other;
 
+import com.Zrips.CMI.Modules.Placeholders.PlaceholderAPIHook;
 import ddggddess.ddggddess.DdggddEss;
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
@@ -23,7 +26,7 @@ public class DdggddessPapi extends PlaceholderExpansion {
 
     @Override
     public String getVersion() {
-        return "${project.version}";
+        return "1.7.1 - Debug";
     }
 
     @Override
@@ -31,7 +34,7 @@ public class DdggddessPapi extends PlaceholderExpansion {
         if(params.equalsIgnoreCase("chatnickname")) {
             JavaPlugin config = ddggddess.ddggddess.DdggddEss.getProvidingPlugin(DdggddEss.class);
             String ret = "&a玩家";
-            List<String> namelist = config.getConfig().getStringList("champion");
+            List<String> namelist = config.getConfig().getStringList("chatnickname");
             for (int i = 0; i < namelist.size() / 2; i++) {
                 if (Objects.equals(namelist.get(i * 2), player.getName())) {
                     ret = namelist.get(i * 2 + 1);
@@ -40,8 +43,33 @@ public class DdggddessPapi extends PlaceholderExpansion {
             }
             return ret;
         }
-        if(params.equalsIgnoreCase("displayname")){
+        else if(params.equalsIgnoreCase("displayname")){
             return ((Player)player).getDisplayName();
+        }
+        else if(params.equalsIgnoreCase("id")){
+            return ((Player)player).getName();
+        }
+        if(params.equalsIgnoreCase("x")){
+            return String.valueOf(((Player)player).getLocation().getX());
+        }
+        if(params.equalsIgnoreCase("y")){
+            return String.valueOf(((Player)player).getLocation().getY());
+        }
+        if(params.equalsIgnoreCase("z")){
+            return String.valueOf(((Player)player).getLocation().getZ());
+        }
+        if(params.equalsIgnoreCase("RGB")){
+            return DdggddEss.rgbColor.getHexColor();
+        }
+        if(params.split(":").length == 2){
+            String[] paramsList = params.split(":");
+            Player player1 = Bukkit.getPlayer(paramsList[0]);
+            return PlaceholderAPI.setPlaceholders(player1,"%" + this.getIdentifier() + "_" + paramsList[1] + "%");
+        }
+        if(params.split("-").length == 2){
+            String[] paramsList = params.split("-");
+            Player player1 = Bukkit.getPlayer(paramsList[0]);
+            return PlaceholderAPI.setPlaceholders(player1,"%" + paramsList[1].replace("![]","_") + "%");
         }
         return null; // Placeholder is unknown by the Expansion
     }

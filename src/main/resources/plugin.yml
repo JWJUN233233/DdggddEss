@@ -2,6 +2,12 @@ name: DdggddEss
 version: '${project.version}'
 main: ddggddess.ddggddess.DdggddEss
 commands:
+  NBT:
+    description:
+      修改string NBT
+  DName:
+    description:
+      设置动态名称
   Dlore:
     description:
       设置动态lore
@@ -92,7 +98,7 @@ permissions:
     default: true
   gm:
     default: op
-  champion:
+  chatnickname:
     default: op
   tpaclear:
     default: op

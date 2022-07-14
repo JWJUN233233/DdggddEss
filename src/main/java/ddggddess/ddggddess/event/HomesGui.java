@@ -19,7 +19,7 @@ import java.util.Objects;
 public class HomesGui implements Listener {
     @EventHandler
     public void onInventoryCloseEvent(InventoryCloseEvent e){
-        JavaPlugin config = DdggddEss.getProvidingPlugin(DdggddEss.class);
+        JavaPlugin config = ddggddess.ddggddess.DdggddEss.getProvidingPlugin(ddggddess.ddggddess.DdggddEss.class);
         List<String> open = config.getConfig().getStringList("home_open");
         if(open.contains(e.getPlayer().getName())){
             open.remove(e.getPlayer().getName());
@@ -28,7 +28,7 @@ public class HomesGui implements Listener {
     }
     @EventHandler
     public void onInventoryClickEvent(InventoryClickEvent e){
-        JavaPlugin config = DdggddEss.getProvidingPlugin(DdggddEss.class);
+        JavaPlugin config = ddggddess.ddggddess.DdggddEss.getProvidingPlugin(ddggddess.ddggddess.DdggddEss.class);
         List<String> open = config.getConfig().getStringList("home_open");
         Location location;
         if(open.contains(e.getWhoClicked().getName())){

@@ -12,14 +12,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 
 public class DLoreUpdata implements Runnable{
+    public Thread t1 = new Thread(this);
+    public boolean isStop = false;
     @Override
     public void run() {
+        while (!isStop){
         while (true){
             try {
-                Thread.sleep(100);
+                Thread.sleep(400);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            try {
             Object[] players = Bukkit.getOnlinePlayers().toArray();
             for (Object player : players) {
                 Inventory inventory = ((Player) player).getInventory();
@@ -34,7 +38,7 @@ public class DLoreUpdata implements Runnable{
                         int c = 1;
                         while (true) {
                             if (nbti.hasKey("Dlore" + c)) {
-                                lore.add(NameTranslate.Translate(nbti.getString("Dlore" + c), ((Player) player)));
+                                lore.add(NameTranslate.Translate(TranslateNBT(nbti , nbti.getString("Dlore" + c)), ((Player) player)));
                             } else {
                                 break;
                             }
@@ -45,12 +49,33 @@ public class DLoreUpdata implements Runnable{
                         item.setItemMeta(itemMeta);
                         inventory.setItem(j,item);
                     }
+                    if(nbti.hasKey("DName")){
+                        ItemMeta meta = item.getItemMeta();
+                        meta.setDisplayName(NameTranslate.Translate(TranslateNBT(nbti,nbti.getString("DName")),(Player)player));
+                        item.setItemMeta(meta);
+                        ((Player) player).getInventory().setItem(j,item);
+                    }
                 }
             }
         }
+            catch (Exception ignored){
+
+            }
+        }
+        }
     }
     public void start(){
-        Thread t1 = new Thread(this);
         t1.start();
+    }
+    public void stop(){
+        this.isStop = true;
+    }
+    private String TranslateNBT(NBTItem NBTI,String s){
+        Set<String> NBTKeys = NBTI.getKeys();
+        String tmp = s;
+        for (String Key : NBTKeys) {
+            tmp = tmp.replace("!NBT:" + Key + "!", NBTI.getString(Key));
+        }
+        return tmp;
     }
 }

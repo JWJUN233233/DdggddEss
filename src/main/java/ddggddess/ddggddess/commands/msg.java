@@ -15,6 +15,7 @@ import java.util.Objects;
 public class msg implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        System.out.println(sender.getName());
         if (sender instanceof Player) {
             if(isplayer.IsHavePlayer(args[0])) {
             if (args.length == 2) {

@@ -15,8 +15,8 @@ public class restart implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/kick @a §c§l服务器正在重启\n§c§l请稍后连接");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/restart");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "kick @a §c§l服务器正在重启\n§c§l请稍后连接");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
     }
 
     public void start(Long time, CommandSender sender) {

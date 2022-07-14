@@ -15,10 +15,12 @@ public class NameTranslate {
     public static String Translate(String s, Player p){
         String ret =  PlaceholderAPI.setPlaceholders(p,s);
         ret = CMIChatColor.translate(ret);
+        ret = ret.replace("\\k"," ");
         return ret;
     }
     public static String Translate(String s){
         String ret = CMIChatColor.translate(s);
+        ret = ret.replace("\\k"," ");
         return ret;
     }
 }

@@ -20,7 +20,7 @@ public class tpa implements CommandExecutor, TabCompleter {
             if (sender instanceof Player){
                 Player sender1 = Bukkit.getPlayer(sender.getName());
                 Player p2 = Bukkit.getPlayer(args[0]);
-                tpask.createAsk(sender1,Bukkit.getPlayer(args[0]), tpask.tptype.tpa);
+                tpask.createAsk(sender1,p2, tpask.tptype.tpa);
             }
             else {
                 sender.sendMessage("§etpa命令只允许玩家使用");
